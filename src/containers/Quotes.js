@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import QuoteCard from '../components/QuoteCard';
 
 class Quotes extends Component {
-
+  displayQuotes = () => this.props.quotes(quote => <QuoteCard key={quote.id} quote={quote}/>)
   render() {
     return (
       <div>
@@ -29,4 +29,4 @@ class Quotes extends Component {
 }
 
 //add arguments to connect as needed
-export default connect()(Quotes);
+export default connect(state => ({ quotes: state.quotes }))(Quotes);
