@@ -84,7 +84,7 @@ describe('QuoteForm Component', () => {
 
     wrapper.find('input[name="author"]').simulate('change', { target: { name: 'author', value: 'test author' }});
     wrapper.find('textarea[name="content"]').simulate('change', { target: { name: 'content', value: 'test content' }})
-    wrapper.find('form').simulate('submit', { preventDefault });
+    wrapper.find('button').simulate('submit', { preventDefault });
 
     expect(preventDefault).to.have.been.called();
   });
@@ -99,7 +99,7 @@ describe('QuoteForm Component', () => {
     expect(wrapper.find('textarea[name="content"]').html()).to.include('test content');
 
 
-    wrapper.find('form').simulate('submit', { preventDefault });
+    wrapper.find('button').simulate('submit', { preventDefault });
 
     expect(wrapper.find('input[name="author"]').html()).to.include('value=""');
     expect(wrapper.find('textarea[name="content"]').html()).to.not.include('test content');
@@ -119,7 +119,7 @@ describe('QuoteForm Component', () => {
     expect(wrapper.find('input[name="author"]').html()).to.include('value="test author"');
     expect(wrapper.find('textarea[name="content"]').html()).to.include('test content');
 
-    wrapper.find('form').simulate('submit', { preventDefault() {} });
+    wrapper.find('button').simulate('submit', { preventDefault() {} });
 
     expect(store.getState().quotes.length).to.equal(1);
     expect(store.getState().quotes[0].author).to.equal('test author')
