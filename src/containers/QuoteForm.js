@@ -7,13 +7,26 @@ class QuoteForm extends Component {
 
   state = {
     //set up a controlled form with internal state
+    content: '',
+    author: ''
   }
 
   handleOnChange = event => {
     // Handle Updating Component State
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+
+
   }
 
   handleOnSubmit = event => {
+    event.preventDefault();
+    this.props.addQuote(this.state)
+    this.setState({
+      content: '',
+      author: ''
+    })
     // Handle Form Submit event default
     // Create quote object from state
     // Pass quote object to action creator
@@ -33,8 +46,11 @@ class QuoteForm extends Component {
                     <div className="col-md-5">
                       <textarea
                         className="form-control"
+                        name='content'
                         value={this.state.content}
+                        onChange={this.handleOnChange}
                       />
+
                     </div>
                   </div>
                   <div className="form-group">
@@ -43,13 +59,15 @@ class QuoteForm extends Component {
                       <input
                         className="form-control"
                         type="text"
+                        name='author'
                         value={this.state.author}
+                        onChange={this.handleOnChange}
                       />
                     </div>
                   </div>
                   <div className="form-group">
                     <div className="col-md-6 col-md-offset-4">
-                      <button type="submit" className="btn btn-default">Add</button>
+                      <button type="submit" className="btn btn-default" onSubmit={(e) => this.handleOnSubmit(e)}>Add</button>
                     </div>
                   </div>
                 </form>
@@ -63,4 +81,5 @@ class QuoteForm extends Component {
 }
 
 //add arguments to connect as needed
-export default connect()(QuoteForm);
+
+export default connect(null, { addQuote })(QuoteForm);
