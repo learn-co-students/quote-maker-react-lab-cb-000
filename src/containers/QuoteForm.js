@@ -28,8 +28,10 @@ class QuoteForm extends Component {
     // Pass quote object to action creator
     this.props.addQuote(newQuote);
     // Update component state to return to default state
-    this.state.content = '';
-    this.state.author = '';
+    this.setState({
+      content: '',
+      author: ''
+    });
   }
 
   render() {
